@@ -145,9 +145,9 @@ function compute_fire_solution(input)
         press("M2_bit_"..power, get_bit(M2, power))
     end
 
-    -------------------------------------------------
-    -- Decimal digits (inverted like sheet)
-    -------------------------------------------------
+----------------------------------------------------
+-- … existing compute_fire_solution code …
+----------------------------------------------------
 
     for power = 0,3 do
         press("N4_bit_"..power, get_inv_bit(N4, power))
@@ -155,22 +155,23 @@ function compute_fire_solution(input)
         press("N2_bit_"..power, get_inv_bit(N2, power))
     end
 
-    -------------------------------------------------
-    -- SIGN INDICATORS
-    -------------------------------------------------
-
     if dx < 0 then press("X_negative",1) end
     if dz < 0 then press("Z_negative",1) end
 
-    -------------------------------------------------
     return pressed
-    -------------------------------------------------
--- USER INPUT SECTION
--------------------------------------------------
+end  -- <<<<<<<<<<<<<<<<<<<<<<<<<<< THIS CLOSES THE FUNCTION
+
+----------------------------------------------------
+-- USER INPUT SECTION (now outside the function)
+----------------------------------------------------
 
 local function askNumber(prompt)
-    write(prompt .. ": ")
-    return tonumber(read())
+    while true do
+        write(prompt .. ": ")
+        local v = tonumber(read())
+        if v then return v end
+        print("Invalid number.")
+    end
 end
 
 local function askString(prompt)
@@ -181,36 +182,27 @@ end
 print("=== Orbital Strike Fire Control ===")
 
 local input = {}
-
 input.origin_x = askNumber("Origin X")
 input.origin_y = askNumber("Origin Y")
 input.origin_z = askNumber("Origin Z")
-
 input.target_x = askNumber("Target X")
 input.target_y = askNumber("Target Y")
 input.target_z = askNumber("Target Z")
-
 input.nuke_size = askNumber("Nuke Size")
 input.stab_depth = askNumber("Stab Depth")
 input.type = askNumber("Weapon Type")
 input.MPS = askNumber("MPS")
-
 input.passcode = askString("Passcode")
-input.correct_passcode = "1234" -- change this
-
--------------------------------------------------
--- RUN CALCULATION
--------------------------------------------------
+input.correct_passcode = "1234"  -- change this as needed
 
 local result = compute_fire_solution(input)
-
--------------------------------------------------
--- OUTPUT RESULTS
--------------------------------------------------
 
 if #result == 0 then
     print("FIRE BLOCKED OR INVALID INPUT")
 else
-    print("Press the following
-
+    print("Press the following cells:")
+    for i=1,#result do
+        print(result[i])
+    end
 end
+
