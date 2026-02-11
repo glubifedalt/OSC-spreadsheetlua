@@ -190,10 +190,10 @@ input.target_y = askNumber("Target Y")
 input.target_z = askNumber("Target Z")
 input.nuke_size = askNumber("Nuke Size")
 input.stab_depth = askNumber("Stab Depth")
-input.type = askNumber("Weapon Type")
+input.type = askString("Weapon Type")
 input.MPS = askNumber("MPS")
 input.passcode = askString("Passcode")
-input.correct_passcode = "1234"  -- change this as needed
+input.correct_passcode = "940"  -- change this as needed
 
 local result = compute_fire_solution(input)
 
