@@ -164,4 +164,53 @@ function compute_fire_solution(input)
 
     -------------------------------------------------
     return pressed
+    -------------------------------------------------
+-- USER INPUT SECTION
+-------------------------------------------------
+
+local function askNumber(prompt)
+    write(prompt .. ": ")
+    return tonumber(read())
+end
+
+local function askString(prompt)
+    write(prompt .. ": ")
+    return read()
+end
+
+print("=== Orbital Strike Fire Control ===")
+
+local input = {}
+
+input.origin_x = askNumber("Origin X")
+input.origin_y = askNumber("Origin Y")
+input.origin_z = askNumber("Origin Z")
+
+input.target_x = askNumber("Target X")
+input.target_y = askNumber("Target Y")
+input.target_z = askNumber("Target Z")
+
+input.nuke_size = askNumber("Nuke Size")
+input.stab_depth = askNumber("Stab Depth")
+input.type = askNumber("Weapon Type")
+input.MPS = askNumber("MPS")
+
+input.passcode = askString("Passcode")
+input.correct_passcode = "1234" -- change this
+
+-------------------------------------------------
+-- RUN CALCULATION
+-------------------------------------------------
+
+local result = compute_fire_solution(input)
+
+-------------------------------------------------
+-- OUTPUT RESULTS
+-------------------------------------------------
+
+if #result == 0 then
+    print("FIRE BLOCKED OR INVALID INPUT")
+else
+    print("Press the following
+
 end
