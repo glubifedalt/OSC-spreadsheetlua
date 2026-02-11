@@ -1,3 +1,15 @@
+local function resolveWeaponType(t)
+    t = string.lower(t)
+
+    local map = {
+        nuke = 1,
+        kinetic = 2,
+        emp = 3
+    }
+
+    return map[t]
+end
+
 -------------------------------------------------
 -- Excel-equivalent math helpers
 -------------------------------------------------
@@ -51,7 +63,12 @@ function compute_fire_solution(input)
 
     local nuke_size  = input.nuke_size
     local stab_depth = input.stab_depth
-    local weapon_type = input.type
+    local weapon_type_string = input.type
+    local weapon_type = resolveWeaponType(weapon_type_string)
+    if not weapon_type then
+        print("Invalid weapon type")
+        return {}
+    end
     local MPS = input.MPS
     local passcode = input.passcode
 
